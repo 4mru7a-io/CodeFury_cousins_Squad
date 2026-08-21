@@ -2,11 +2,16 @@ from huggingface_hub import list_models
 import requests
 from bs4 import BeautifulSoup
 
-from normalizer import normalize_model
+from config import settings
+from embeddings.embed import Embedder
+from vectorstore.create_index import get_collection, upsert_documents
+from rag.document_builder import build_document
+from discovery.normalizer import normalize_model
+
 
 def search_models(query, max_results=5):
     """
-    STEP 1: Discover relevant model IDs from Hugging Face.
+    Discover relevant model IDs from Hugging Face.
     """
 
     print(f"\n🔍 Searching Hugging Face for: {query}\n")
@@ -35,7 +40,7 @@ def search_models(query, max_results=5):
 
 def scrape_model_page(url):
     """
-    STEP 2: Scrape an individual model page.
+    Scrape an individual model page.
     """
 
     headers = {
@@ -91,6 +96,7 @@ if __name__ == "__main__":
 
         print("\n🔍 Discovering models...")
 
+        # STEP 1: MODEL DISCOVERY
         results = search_models(query)
 
         if not results:
@@ -103,6 +109,21 @@ if __name__ == "__main__":
                 f"\n✅ Found {len(results)} models.\n"
             )
 
+            # Load RAG components only once
+            print("🔄 Loading RAG components...")
+
+            embedder = Embedder(
+                settings.embedding_model
+            )
+
+            collection = get_collection(
+                settings.vector_dir,
+                settings.collection_name
+            )
+
+            print("✅ RAG ready.\n")
+
+            # STEP 2 onwards
             for i, model in enumerate(
                 results,
                 start=1
@@ -116,7 +137,7 @@ if __name__ == "__main__":
 
                 try:
 
-                    # STEP 2: SCRAPE
+                    # STEP 2: SCRAPE MODEL PAGE
                     scraped_data = scrape_model_page(
                         model["url"]
                     )
@@ -128,11 +149,44 @@ if __name__ == "__main__":
                         scraped_data
                     )
 
-                    # DISPLAY RESULT
+                    # STEP 4: BUILD RAG DOCUMENT
+                    rag_text = build_document(
+                        normalized_model
+                    )
+
+                    # Chroma metadata cannot contain None values
+                    clean_metadata = {
+                        key: str(value)
+                        for key, value in normalized_model.items()
+                        if value is not None
+                    }
+
+                    document = {
+                        "text": rag_text,
+                        "metadata": clean_metadata
+                    }
+
+                    # STEP 5: CREATE EMBEDDING
+                    embeddings = embedder.encode(
+                        [rag_text]
+                    )
+
+                    # STEP 6: ADD TO CHROMA
+                    upserted = upsert_documents(
+                        collection,
+                        [document],
+                        embeddings
+                    )
+
                     print("\nNORMALIZED MODEL DATA:\n")
 
                     for key, value in normalized_model.items():
                         print(f"{key}: {value}")
+
+                    print(
+                        f"\n✅ Added to RAG database: "
+                        f"{upserted} model"
+                    )
 
                 except Exception as e:
 

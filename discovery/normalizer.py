@@ -8,7 +8,6 @@ def normalize_model(model_id, model_url, scraped_data):
     model_name = model_id.split("/")[-1]
     provider = model_id.split("/")[0]
 
-    # Task detection
     task = "unknown"
 
     if "automatic speech recognition" in raw_text:
@@ -23,7 +22,6 @@ def normalize_model(model_id, model_url, scraped_data):
     elif "image classification" in raw_text:
         task = "image-classification"
 
-    # Language detection
     languages = []
 
     if "hindi" in raw_text:
@@ -35,7 +33,6 @@ def normalize_model(model_id, model_url, scraped_data):
     if "chinese" in raw_text:
         languages.append("Chinese")
 
-    # License detection
     license_name = None
 
     if "apache-2.0" in raw_text:
@@ -47,7 +44,6 @@ def normalize_model(model_id, model_url, scraped_data):
     elif "cc-by-4.0" in raw_text:
         license_name = "CC-BY-4.0"
 
-    # Open-source detection
     open_source = None
 
     if license_name in [
@@ -57,7 +53,6 @@ def normalize_model(model_id, model_url, scraped_data):
     ]:
         open_source = True
 
-    # Description
     description = scraped_data["text"][:500]
 
     record = {

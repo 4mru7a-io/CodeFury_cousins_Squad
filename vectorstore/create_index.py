@@ -9,12 +9,22 @@ def get_collection(vector_dir: str, collection_name: str):
     )
 
 def upsert_documents(collection, documents, embeddings):
-    ids = [d["id"] for d in documents]
+
+    ids = [
+        f"model-{doc['metadata']['model_name']}"
+        for doc in documents
+    ]
 
     collection.upsert(
         ids=ids,
-        documents=[d["text"] for d in documents],
-        metadatas=[d["metadata"] for d in documents],
+        documents=[
+            d["text"]
+            for d in documents
+        ],
+        metadatas=[
+            d["metadata"]
+            for d in documents
+        ],
         embeddings=embeddings,
     )
 
