@@ -2,10 +2,11 @@ from huggingface_hub import list_models
 import requests
 from bs4 import BeautifulSoup
 
+from normalizer import normalize_model
 
 def search_models(query, max_results=5):
     """
-    STEP 1: Discover relevant model IDs.
+    STEP 1: Discover relevant model IDs from Hugging Face.
     """
 
     print(f"\n🔍 Searching Hugging Face for: {query}\n")
@@ -53,7 +54,10 @@ def scrape_model_page(url):
 
     response.raise_for_status()
 
-    soup = BeautifulSoup(response.text, "html.parser")
+    soup = BeautifulSoup(
+        response.text,
+        "html.parser"
+    )
 
     title = (
         soup.title.get_text(strip=True)
@@ -80,6 +84,7 @@ if __name__ == "__main__":
     ).strip()
 
     if not query:
+
         print("❌ Please enter a requirement.")
 
     else:
@@ -111,22 +116,26 @@ if __name__ == "__main__":
 
                 try:
 
-                    data = scrape_model_page(
+                    # STEP 2: SCRAPE
+                    scraped_data = scrape_model_page(
                         model["url"]
                     )
 
-                    print(
-                        f"\nTitle: {data['title']}"
+                    # STEP 3: NORMALIZE
+                    normalized_model = normalize_model(
+                        model["id"],
+                        model["url"],
+                        scraped_data
                     )
 
-                    print("\nExtracted text:")
+                    # DISPLAY RESULT
+                    print("\nNORMALIZED MODEL DATA:\n")
 
-                    print(
-                        data["text"][:1000]
-                    )
+                    for key, value in normalized_model.items():
+                        print(f"{key}: {value}")
 
                 except Exception as e:
 
                     print(
-                        f"\n❌ Scraping failed: {e}"
+                        f"\n❌ Processing failed: {e}"
                     )
