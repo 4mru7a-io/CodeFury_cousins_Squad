@@ -1,66 +1,41 @@
+from huggingface_hub import list_models
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import quote
 
 
 def search_models(query, max_results=5):
     """
-    Discover model pages from Hugging Face's public model search page.
+    STEP 1: Discover relevant model IDs.
     """
 
-    encoded_query = quote(query)
+    print(f"\n🔍 Searching Hugging Face for: {query}\n")
 
-    url = f"https://huggingface.co/models?search={encoded_query}"
-
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/131.0.0.0 Safari/537.36"
+    models = list(
+        list_models(
+            search=query,
+            limit=max_results,
+            sort="downloads"
         )
-    }
-
-    print(f"\n🌐 Searching: {url}")
-
-    response = requests.get(
-        url,
-        headers=headers,
-        timeout=15
     )
-
-    print(f"HTTP Status: {response.status_code}")
-
-    response.raise_for_status()
-
-    soup = BeautifulSoup(response.text, "html.parser")
 
     results = []
 
-    for link in soup.find_all("a", href=True):
+    for model in models:
 
-        href = link["href"]
+        model_url = f"https://huggingface.co/{model.id}"
 
-        # Hugging Face model pages
-        if href.startswith("/"):
-            parts = href.strip("/").split("/")
-
-            if len(parts) == 2 and parts[0] not in [
-                "datasets",
-                "spaces",
-                "docs"
-            ]:
-                model_url = "https://huggingface.co" + href
-
-                if model_url not in results:
-                    results.append(model_url)
-
-        if len(results) >= max_results:
-            break
+        results.append({
+            "id": model.id,
+            "url": model_url
+        })
 
     return results
 
 
 def scrape_model_page(url):
+    """
+    STEP 2: Scrape an individual model page.
+    """
 
     headers = {
         "User-Agent": (
@@ -80,14 +55,21 @@ def scrape_model_page(url):
 
     soup = BeautifulSoup(response.text, "html.parser")
 
-    title = soup.title.get_text(strip=True) if soup.title else ""
+    title = (
+        soup.title.get_text(strip=True)
+        if soup.title
+        else ""
+    )
 
-    text = soup.get_text(" ", strip=True)
+    text = soup.get_text(
+        " ",
+        strip=True
+    )
 
     return {
         "url": url,
         "title": title,
-        "text": text[:10000]
+        "text": text[:5000]
     }
 
 
@@ -97,29 +79,54 @@ if __name__ == "__main__":
         "What type of model do you need? "
     ).strip()
 
-    print("\n🔍 Discovering models...\n")
+    if not query:
+        print("❌ Please enter a requirement.")
 
-    results = search_models(query)
-
-    if not results:
-        print("❌ No models discovered.")
-        print("Try another query.")
     else:
 
-        print(f"✅ Found {len(results)} model pages.\n")
+        print("\n🔍 Discovering models...")
 
-        for i, url in enumerate(results, 1):
+        results = search_models(query)
 
-            print("=" * 70)
-            print(f"MODEL #{i}")
-            print(url)
+        if not results:
 
-            try:
-                data = scrape_model_page(url)
+            print("\n❌ No models found.")
 
-                print(f"Title: {data['title']}")
-                print("\nExtracted text:")
-                print(data["text"][:500])
+        else:
 
-            except Exception as e:
-                print(f"⚠️ Could not scrape page: {e}")
+            print(
+                f"\n✅ Found {len(results)} models.\n"
+            )
+
+            for i, model in enumerate(
+                results,
+                start=1
+            ):
+
+                print("=" * 70)
+
+                print(f"MODEL #{i}")
+                print(f"ID: {model['id']}")
+                print(f"URL: {model['url']}")
+
+                try:
+
+                    data = scrape_model_page(
+                        model["url"]
+                    )
+
+                    print(
+                        f"\nTitle: {data['title']}"
+                    )
+
+                    print("\nExtracted text:")
+
+                    print(
+                        data["text"][:1000]
+                    )
+
+                except Exception as e:
+
+                    print(
+                        f"\n❌ Scraping failed: {e}"
+                    )
