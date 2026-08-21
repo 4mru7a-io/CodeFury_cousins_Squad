@@ -1,0 +1,7 @@
+pandas>=2.2
+openpyxl>=3.1
+sentence-transformers>=3.0
+chromadb>=0.5
+requests>=2.32
+python-dotenv>=1.0
+numpy>=1.26
