@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<title>ModelProof — AI Model Marketplace</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+</head>
+
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<header class="navbar" id="navbar">
+<div class="nav-inner">
+<a href="#home" class="logo"><span class="logo-mark"><i class="fa-solid fa-cube"></i></span>ModelProof</a>
+<nav class="nav-links" id="navLinks">
+<a href="#models">Models</a><a href="#compare">Compare</a><a href="#evaluation">Evaluation</a><a href="#how">How it works</a><a href="#creators">Creators</a>
+</nav>
+<div class="nav-actions">
+<a href="#models" class="btn btn-green magnetic">Explore <i class="fa-solid fa-arrow-right"></i></a>
+<button class="menu-btn" id="menuBtn"><i class="fa-solid fa-bars"></i></button>
+</div>
+</div>
+</header>
+
+<section class="hero" id="home">
+<div class="container">
+<div class="hero-grid">
+
+<div class="reveal">
+<div class="hero-label"><span></span>AI MODEL MARKETPLACE</div>
+
+<!-- ONLY CHANGE: HERO HEADING FONT/STYLE -->
+<h1>
+Find&nbsp;the<br>
+<em>right</em><br>
+model.
+</h1>
+
+<p class="hero-description">
+Discover, compare and evaluate AI models using transparent performance data, pricing and evidence — all in one place.
+</p>
+
+<div class="hero-actions">
+<a href="#models" class="btn btn-green magnetic">Explore models <i class="fa-solid fa-arrow-right"></i></a>
+<a href="#compare" class="btn magnetic">Compare models <i class="fa-solid fa-code-compare"></i></a>
+</div>
+</div>
+
+<div class="hero-side reveal delay-2">
+<div class="scene" id="scene">
+<div class="orbit"></div><div class="orbit orbit-two"></div>
+<div class="cube">
+<div class="face front"><i class="fa-solid fa-brain"></i></div>
+<div class="face back"><i class="fa-solid fa-code"></i></div>
+<div class="face right"><i class="fa-solid fa-eye"></i></div>
+<div class="face left"><i class="fa-solid fa-microchip"></i></div>
+<div class="face top"><i class="fa-solid fa-cube"></i></div>
+<div class="face bottom"><i class="fa-solid fa-network-wired"></i></div>
+</div>
+<span class="particle p1"></span><span class="particle p2"></span><span class="particle p3"></span><span class="particle p4"></span>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<div class="marquee"><div class="marquee-track">
+<div class="marquee-item"><i class="fa-solid fa-circle"></i>TEXT</div><div class="marquee-item"><i class="fa-solid fa-circle"></i>VISION</div><div class="marquee-item"><i class="fa-solid fa-circle"></i>CODING</div><div class="marquee-item"><i class="fa-solid fa-circle"></i>AUDIO</div><div class="marquee-item"><i class="fa-solid fa-circle"></i>IMAGE</div><div class="marquee-item"><i class="fa-solid fa-circle"></i>RAG</div><div class="marquee-item"><i class="fa-solid fa-circle"></i>AGENTS</div><div class="marquee-item"><i class="fa-solid fa-circle"></i>MULTIMODAL</div><div class="marquee-item"><i class="fa-solid fa-circle"></i>TEXT</div><div class="marquee-item"><i class="fa-solid fa-circle"></i>VISION</div><div class="marquee-item"><i class="fa-solid fa-circle"></i>CODING</div>
+</div></div>
+
+<section class="section" id="models">
+<div class="container">
+<div class="section-header reveal"><div><div class="section-number">01 / Explore</div><h2>AI models,<br>without the noise.</h2></div><p>Search by capability, use case, performance, price or provider. Find models that actually fit.</p></div>
+
+<div class="search-row reveal">
+<div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="modelSearch" type="search" placeholder="Search models, capabilities or providers..."></div>
+<button class="btn btn-green" type="button"><i class="fa-solid fa-sliders"></i>Filter</button>
+</div>
+
+<div class="filter-row reveal">
+<button class="filter active" data-filter="all">All</button><button class="filter" data-filter="text">Text</button><button class="filter" data-filter="vision">Vision</button><button class="filter" data-filter="code">Code</button><button class="filter" data-filter="audio">Audio</button><button class="filter" data-filter="image">Image</button>
+</div>
+
+<div class="models-grid">
+
+<article class="model-card tilt reveal" data-category="text" data-name="GPT-4.1 OpenAI text reasoning">
+<div class="card-top"><div class="model-icon"><i class="fa-solid fa-brain"></i></div><span class="badge">Verified</span></div>
+<h3>GPT-4.1</h3><p>General-purpose intelligence for reasoning, generation, coding and production applications.</p>
+<div class="tags"><span class="tag">Text</span><span class="tag">Reasoning</span><span class="tag">API</span></div>
+<div class="metrics"><div class="metric"><span>Match</span><strong class="green">96%</strong></div><div class="metric"><span>Latency</span><strong>Low</strong></div><div class="metric"><span>Rating</span><strong>4.9 ★</strong></div></div>
+<div class="card-footer"><div class="price"><strong>$$</strong>per 1K tokens</div><div class="card-buttons"><button class="compare-btn" data-model="GPT-4.1"><i class="fa-solid fa-code-compare"></i> Compare</button><button class="btn btn-green view-btn" data-model="GPT-4.1">View</button></div></div>
+</article>
+
+<article class="model-card tilt reveal delay-1" data-category="vision" data-name="Qwen2.5-VL vision multimodal">
+<div class="card-top"><div class="model-icon"><i class="fa-solid fa-eye"></i></div><span class="badge">Popular</span></div>
+<h3>Qwen2.5-VL</h3><p>Multimodal intelligence for visual reasoning, documents and image understanding.</p>
+<div class="tags"><span class="tag">Vision</span><span class="tag">OCR</span><span class="tag">Multimodal</span></div>
+<div class="metrics"><div class="metric"><span>Match</span><strong class="green">93%</strong></div><div class="metric"><span>Latency</span><strong>Medium</strong></div><div class="metric"><span>Rating</span><strong>4.8 ★</strong></div></div>
+<div class="card-footer"><div class="price"><strong>$</strong>per 1K tokens</div><div class="card-buttons"><button class="compare-btn" data-model="Qwen2.5-VL"><i class="fa-solid fa-code-compare"></i> Compare</button><button class="btn btn-green view-btn" data-model="Qwen2.5-VL">View</button></div></div>
+</article>
+
+<article class="model-card tilt reveal delay-2" data-category="code" data-name="DeepSeek Coder coding programming">
+<div class="card-top"><div class="model-icon"><i class="fa-solid fa-code"></i></div><span class="badge">Developer</span></div>
+<h3>DeepSeek-Coder</h3><p>Built for software engineering, code generation, debugging and developer workflows.</p>
+<div class="tags"><span class="tag">Code</span><span class="tag">Debug</span><span class="tag">Developer</span></div>
+<div class="metrics"><div class="metric"><span>Match</span><strong class="green">91%</strong></div><div class="metric"><span>Latency</span><strong>Low</strong></div><div class="metric"><span>Rating</span><strong>4.8 ★</strong></div></div>
+<div class="card-footer"><div class="price"><strong>$</strong>low cost</div><div class="card-buttons"><button class="compare-btn" data-model="DeepSeek-Coder"><i class="fa-solid fa-code-compare"></i> Compare</button><button class="btn btn-green view-btn" data-model="DeepSeek-Coder">View</button></div></div>
+</article>
+
+<article class="model-card tilt reveal" data-category="image" data-name="Stable Diffusion image generation">
+<div class="card-top"><div class="model-icon"><i class="fa-regular fa-image"></i></div><span class="badge">Open</span></div>
+<h3>Stable Diffusion</h3><p>Flexible image generation for creative, commercial and experimental workflows.</p>
+<div class="tags"><span class="tag">Image</span><span class="tag">Generation</span><span class="tag">Open</span></div>
+<div class="metrics"><div class="metric"><span>Match</span><strong class="green">89%</strong></div><div class="metric"><span>Latency</span><strong>Medium</strong></div><div class="metric"><span>Rating</span><strong>4.7 ★</strong></div></div>
+<div class="card-footer"><div class="price"><strong>FREE</strong>self-hosted</div><div class="card-buttons"><button class="compare-btn" data-model="Stable Diffusion"><i class="fa-solid fa-code-compare"></i> Compare</button><button class="btn btn-green view-btn" data-model="Stable Diffusion">View</button></div></div>
+</article>
+
+<article class="model-card tilt reveal delay-1" data-category="audio" data-name="Whisper speech audio transcription">
+<div class="card-top"><div class="model-icon"><i class="fa-solid fa-microphone"></i></div><span class="badge">Reliable</span></div>
+<h3>Whisper</h3><p>Multilingual automatic speech recognition for accurate audio transcription.</p>
+<div class="tags"><span class="tag">Audio</span><span class="tag">Speech</span><span class="tag">ASR</span></div>
+<div class="metrics"><div class="metric"><span>Match</span><strong class="green">94%</strong></div><div class="metric"><span>Latency</span><strong>Low</strong></div><div class="metric"><span>Rating</span><strong>4.9 ★</strong></div></div>
+<div class="card-footer"><div class="price"><strong>FREE</strong>open source</div><div class="card-buttons"><button class="compare-btn" data-model="Whisper"><i class="fa-solid fa-code-compare"></i> Compare</button><button class="btn btn-green view-btn" data-model="Whisper">View</button></div></div>
+</article>
+
+<article class="model-card tilt reveal delay-2" data-category="text" data-name="Llama 3 Meta text open source RAG">
+<div class="card-top"><div class="model-icon"><i class="fa-solid fa-layer-group"></i></div><span class="badge">Open Weight</span></div>
+<h3>Llama 3</h3><p>Open-weight language model family for local AI, RAG, assistants and custom applications.</p>
+<div class="tags"><span class="tag">Text</span><span class="tag">RAG</span><span class="tag">Open</span></div>
+<div class="metrics"><div class="metric"><span>Match</span><strong class="green">90%</strong></div><div class="metric"><span>Latency</span><strong>Low</strong></div><div class="metric"><span>Rating</span><strong>4.8 ★</strong></div></div>
+<div class="card-footer"><div class="price"><strong>FREE</strong>self-hosted</div><div class="card-buttons"><button class="compare-btn" data-model="Llama 3"><i class="fa-solid fa-code-compare"></i> Compare</button><button class="btn btn-green view-btn" data-model="Llama 3">View</button></div></div>
+</article>
+
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<div class="section-header reveal"><div><div class="section-number">02 / Performance</div><h2>See the<br>difference.</h2></div><p>A visual snapshot of model performance across common AI workloads.</p></div>
+<div class="data-visual reveal">
+<div class="data-column"><div class="data-bar" style="--height:86%"></div><span>GPT</span></div>
+<div class="data-column"><div class="data-bar" style="--height:75%"></div><span>QWEN</span></div>
+<div class="data-column"><div class="data-bar" style="--height:92%"></div><span>DEEPSEEK</span></div>
+<div class="data-column"><div class="data-bar" style="--height:68%"></div><span>LLAMA</span></div>
+<div class="data-column"><div class="data-bar" style="--height:80%"></div><span>WHISPER</span></div>
+</div>
+</div>
+</section>
+
+<section class="section compare-section" id="compare">
+<div class="container">
+<div class="section-header reveal"><div><div class="section-number">03 / Compare</div><h2>Choose with<br>confidence.</h2></div><p>Compare performance, cost, speed and capabilities before committing to a model.</p></div>
+<div class="compare-layout reveal">
+<div class="compare-header">
+<div><span class="section-number">Model</span></div>
+<div><div class="compare-model"><div class="compare-model-icon"><i class="fa-solid fa-brain"></i></div><div><strong>GPT-4.1</strong><small>OpenAI</small></div></div></div>
+<div><div class="compare-model"><div class="compare-model-icon"><i class="fa-solid fa-eye"></i></div><div><strong>Qwen2.5-VL</strong><small>Alibaba</small></div></div></div>
+<div><div class="compare-model"><div class="compare-model-icon"><i class="fa-solid fa-code"></i></div><div><strong>DeepSeek</strong><small>DeepSeek</small></div></div></div>
+</div>
+<table class="compare-table">
+<tr><td>Overall</td><td class="best">96</td><td>93</td><td>91</td></tr>
+<tr><td>Reasoning</td><td class="best">96%</td><td>90%</td><td>88%</td></tr>
+<tr><td>Coding</td><td>94%</td><td>87%</td><td class="best">97%</td></tr>
+<tr><td>Vision</td><td>82%</td><td class="best">98%</td><td>70%</td></tr>
+<tr><td>Latency</td><td class="best">Low</td><td>Medium</td><td class="best">Low</td></tr>
+<tr><td>Rating</td><td class="best">4.9 ★</td><td>4.8 ★</td><td>4.8 ★</td></tr>
+<tr><td>Best for</td><td class="best">General AI</td><td>Vision</td><td>Coding</td></tr>
+</table>
+<div class="compare-actions"><button class="btn btn-green" id="detailedCompare">Detailed comparison <i class="fa-solid fa-arrow-right"></i></button></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="evaluation">
+<div class="container">
+<div class="section-header reveal"><div><div class="section-number">04 / Evaluation</div><h2>Don't just pick.<br><span style="color:#76B900">Prove.</span></h2></div><p>Evidence, performance, value and trust combine into an understandable score.</p></div>
+<div class="evaluation-grid">
+<div class="score-panel reveal"><span class="score-label">ModelProof confidence</span><div class="big-score">96</div><p>Overall recommendation score based on performance, reliability, value and task compatibility.</p></div>
+<div class="evaluation-list">
+<div class="eval-item reveal"><div class="eval-icon"><i class="fa-solid fa-database"></i></div><h3>Evidence</h3><p>Ground model information in retrieved and verifiable sources.</p><div class="progress"><div class="progress-fill" data-width="96"></div></div></div>
+<div class="eval-item reveal delay-1"><div class="eval-icon"><i class="fa-solid fa-chart-line"></i></div><h3>Performance</h3><p>Understand how models perform against relevant benchmarks.</p><div class="progress"><div class="progress-fill" data-width="94"></div></div></div>
+<div class="eval-item reveal delay-2"><div class="eval-icon"><i class="fa-solid fa-scale-balanced"></i></div><h3>Value</h3><p>Balance capability, cost and deployment requirements.</p><div class="progress"><div class="progress-fill" data-width="91"></div></div></div>
+<div class="eval-item reveal delay-3"><div class="eval-icon"><i class="fa-solid fa-shield-halved"></i></div><h3>Trust</h3><p>Make recommendations more transparent and explainable.</p><div class="progress"><div class="progress-fill" data-width="95"></div></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="how">
+<div class="container">
+<div class="section-header reveal"><div><div class="section-number">05 / Process</div><h2>From problem<br>to deployment.</h2></div><p>A simple workflow for developers, startups and businesses.</p></div>
+<div class="steps">
+<div class="step reveal"><div class="step-number">01</div><div class="step-icon"><i class="fa-solid fa-message"></i></div><h3>Describe</h3><p>Describe your problem, requirements, budget and expected workload.</p></div>
+<div class="step reveal delay-1"><div class="step-number">02</div><div class="step-icon"><i class="fa-solid fa-magnifying-glass"></i></div><h3>Discover</h3><p>Find relevant models using search and structured filters.</p></div>
+<div class="step reveal delay-2"><div class="step-number">03</div><div class="step-icon"><i class="fa-solid fa-code-compare"></i></div><h3>Evaluate</h3><p>Compare performance, evidence, pricing and compatibility.</p></div>
+<div class="step reveal delay-3"><div class="step-number">04</div><div class="step-icon"><i class="fa-solid fa-rocket"></i></div><h3>Deploy</h3><p>Move from discovery to deployment with confidence.</p></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="creators">
+<div class="container">
+<div class="creator reveal">
+<div><div class="creator-label">For model creators</div><h2>Put your model<br>on the map.</h2><p>Publish your AI model, showcase its capabilities, provide evidence and connect with developers looking for exactly what you built.</p></div>
+<button class="btn btn-green" id="creatorButton">List your model <i class="fa-solid fa-arrow-right"></i></button>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand"><a href="#home" class="logo"><span class="logo-mark"><i class="fa-solid fa-cube"></i></span>ModelProof</a><p>A transparent marketplace for discovering, evaluating, comparing and deploying AI models.</p></div>
+<div class="footer-col"><h4>Product</h4><a href="#models">Models</a><a href="#compare">Compare</a><a href="#evaluation">Evaluation</a><a href="#how">How it works</a></div>
+<div class="footer-col"><h4>Creators</h4><a href="#creators">List a model</a><a href="#">Dashboard</a><a href="#">Guidelines</a><a href="#">Pricing</a></div>
+<div class="footer-col"><h4>Connect</h4><a href="https://github.com/4mru7a-io/CodeFury_cousins_Squad" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a><a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a><a href="#"><i class="fa-brands fa-x-twitter"></i> X / Twitter</a></div>
+</div>
+<div class="footer-bottom"><span id="year">© 2026 ModelProof</span><span>AI MODEL MARKETPLACE</span></div>
+</div>
+</footer>
+
+<div class="compare-bar" id="compareBar"><div class="compare-count"><strong id="compareCount">0</strong> models selected</div><button class="btn btn-green" id="compareNow">Compare <i class="fa-solid fa-arrow-right"></i></button></div>
+
+<div class="modal" id="modal">
+<div class="modal-box">
+<button class="modal-close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+<div class="modal-icon"><i class="fa-solid fa-cube"></i></div>
+<h2 id="modalTitle">Model</h2>
+<p id="modalText">Model information.</p>
+<div class="tags"><span class="tag">Verified</span><span class="tag">Evidence-backed</span><span class="tag">Deployment ready</span></div><br>
+<button class="btn btn-green" id="deployButton"><i class="fa-solid fa-rocket"></i> Deploy model</button>
+</div>
+</div>
+
+<script>
+const cursor=document.getElementById("cursor"),cursorRing=document.getElementById("cursorRing");
+let mx=0,my=0,rx=0,ry=0;
+if(window.matchMedia("(pointer:fine)").matches){
+document.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+"px";cursor.style.top=my+"px"});
+(function loop(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;cursorRing.style.left=rx+"px";cursorRing.style.top=ry+"px";requestAnimationFrame(loop)})();
+document.querySelectorAll("a,button,.model-card").forEach(el=>{
+el.addEventListener("mouseenter",()=>{cursor.style.width="14px";cursor.style.height="14px";cursorRing.style.width="48px";cursorRing.style.height="48px"});
+el.addEventListener("mouseleave",()=>{cursor.style.width="8px";cursor.style.height="8px";cursorRing.style.width="34px";cursorRing.style.height="34px"});
+});
+}
+
+const navbar=document.getElementById("navbar");
+window.addEventListener("scroll",()=>navbar.classList.toggle("scrolled",scrollY>30));
+
+const menuBtn=document.getElementById("menuBtn"),navLinks=document.getElementById("navLinks");
+menuBtn.addEventListener("click",()=>{
+navLinks.classList.toggle("open");
+menuBtn.querySelector("i").classList.toggle("fa-bars");
+menuBtn.querySelector("i").classList.toggle("fa-xmark");
+});
+document.querySelectorAll(".nav-links a").forEach(a=>a.addEventListener("click",()=>navLinks.classList.remove("open")));
+
+const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{
+if(e.isIntersecting){e.target.classList.add("active");revealObserver.unobserve(e.target)}
+}),{threshold:.1});
+document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
+
+const tiltCards=document.querySelectorAll(".tilt");
+if(window.matchMedia("(pointer:fine)").matches){
+tiltCards.forEach(card=>{
+card.addEventListener("mousemove",e=>{
+const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+const rx=((r.height/2-y)/(r.height/2))*4,ry=((x-r.width/2)/(r.width/2))*4;
+card.style.transform=`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+card.style.setProperty("--mouse-x",x+"px");card.style.setProperty("--mouse-y",y+"px");
+});
+card.addEventListener("mouseleave",()=>card.style.transform="");
+});
+}
+
+const scene=document.getElementById("scene");
+if(scene&&window.matchMedia("(pointer:fine)").matches){
+scene.addEventListener("mousemove",e=>{
+const r=scene.getBoundingClientRect(),x=e.clientX/r.width-.5,y=e.clientY/r.height-.5;
+scene.style.transform=`rotateX(${y*-8}deg) rotateY(${x*10}deg)`;
+});
+scene.addEventListener("mouseleave",()=>scene.style.transform="");
+}
+
+const search=document.getElementById("modelSearch"),cards=document.querySelectorAll(".model-card");
+function filterModels(){
+const q=search.value.toLowerCase().trim(),active=document.querySelector(".filter.active").dataset.filter;
+cards.forEach(c=>c.style.display=c.dataset.name.toLowerCase().includes(q)&&(active==="all"||c.dataset.category===active)?"flex":"none");
+}
+search.addEventListener("input",filterModels);
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{
+document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");filterModels();
+}));
+
+let selected=[];
+const compareBar=document.getElementById("compareBar"),compareCount=document.getElementById("compareCount");
+document.querySelectorAll(".compare-btn").forEach(b=>b.addEventListener("click",()=>{
+const model=b.dataset.model;
+if(selected.includes(model)){selected=selected.filter(x=>x!==model);b.classList.remove("selected");b.innerHTML='<i class="fa-solid fa-code-compare"></i> Compare'}
+else if(selected.length<3){selected.push(model);b.classList.add("selected");b.innerHTML='<i class="fa-solid fa-check"></i> Added'}
+else{return}
+compareCount.textContent=selected.length;compareBar.classList.toggle("show",selected.length>0);
+}));
+
+const descriptions={
+"GPT-4.1":"General-purpose intelligence for reasoning, generation, coding and production applications.",
+"Qwen2.5-VL":"Multimodal intelligence for image understanding, visual reasoning, OCR and documents.",
+"DeepSeek-Coder":"Developer-focused intelligence optimized for coding, debugging and software engineering.",
+"Stable Diffusion":"Flexible image generation for creative, commercial and experimental workflows.",
+"Whisper":"Multilingual speech recognition for transcription and audio understanding.",
+"Llama 3":"Open-weight language models for local AI, RAG, assistants and custom applications."
+};
+const modal=document.getElementById("modal"),modalTitle=document.getElementById("modalTitle"),modalText=document.getElementById("modalText");
+function openModal(t,p){modalTitle.textContent=t;modalText.textContent=p;modal.classList.add("show");document.body.style.overflow="hidden"}
+function closeModal(){modal.classList.remove("show");document.body.style.overflow=""}
+document.querySelectorAll(".view-btn").forEach(b=>b.addEventListener("click",()=>openModal(b.dataset.model,descriptions[b.dataset.model])));
+document.getElementById("modalClose").addEventListener("click",closeModal);
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+document.getElementById("compareNow").addEventListener("click",()=>{if(selected.length)openModal("Your comparison",selected.join(" · ")+" are selected. Detailed performance, pricing and deployment comparison is ready to connect to the backend.")});
+document.getElementById("detailedCompare").addEventListener("click",()=>openModal("Detailed comparison","Compare models across benchmarks, latency, context length, pricing, reliability, deployment options and evidence."));
+document.getElementById("creatorButton").addEventListener("click",()=>openModal("List your AI model","Creator onboarding can connect directly to the ModelProof backend. Add model metadata, capabilities, benchmarks, pricing and deployment information."));
+document.getElementById("deployButton").addEventListener("click",()=>openModal("Deployment","The deployment workflow is ready to connect to your backend API."));
+
+const progressObserver=new IntersectionObserver(entries=>entries.forEach(e=>{
+if(e.isIntersecting){e.target.style.width=e.target.dataset.width+"%";progressObserver.unobserve(e.target)}
+}),{threshold:.4});
+document.querySelectorAll(".progress-fill").forEach(x=>progressObserver.observe(x));
+
+const dataObserver=new IntersectionObserver(entries=>entries.forEach(e=>{
+if(e.isIntersecting){e.target.classList.add("active");dataObserver.unobserve(e.target)}
+}),{threshold:.4});
+document.querySelectorAll(".data-bar").forEach(x=>dataObserver.observe(x));
+
+if(window.matchMedia("(pointer:fine)").matches){
+document.querySelectorAll(".magnetic").forEach(b=>{
+b.addEventListener("mousemove",e=>{
+const r=b.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;
+b.style.transform=`translate(${x*.12}px,${y*.12}px)`;
+});
+b.addEventListener("mouseleave",()=>b.style.transform="");
+});
+}
+document.getElementById("year").textContent="© "+new Date().getFullYear()+" ModelProof";
+</script>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -21,9 +21,8 @@ def build_index():
 def ask(query: str, top_k: int = 10):
 
     # 1. Parse user requirements
-        # Parse requirement
-        parser = RequirementParser()
-        parsed_requirement = parser.parse(query)
+    parser = RequirementParser()
+    requirement = parser.parse(query)
 
     # 2. Retrieve a broader set of candidates
     embedder = Embedder(settings.embedding_model)
@@ -40,12 +39,16 @@ def ask(query: str, top_k: int = 10):
     )
 
     # 3. Filter retrieved candidates
-        # Candidate filtering
-        filtered = filter_candidates(retrieved, parsed_requirement)
+    filtered_models = filter_candidates(
+        retrieved,
+        requirement
+    )
 
     # 4. Build grounded prompt from filtered models
-        # Build grounded prompt from filtered candidates
-        prompt = build_grounded_prompt(query, filtered)
+    prompt = build_grounded_prompt(
+        query,
+        filtered_models
+    )
 
     # 5. Generate final answer
     answer = generate_answer(
@@ -57,9 +60,9 @@ def ask(query: str, top_k: int = 10):
 
     return {
         "query": query,
-            "parsed_requirement": parsed_requirement,
+        "parsed_requirement": requirement,
         "retrieved_models": retrieved,
-            "filtered_models": filtered,
+        "filtered_models": filtered_models,
         "answer": answer
     }
 
