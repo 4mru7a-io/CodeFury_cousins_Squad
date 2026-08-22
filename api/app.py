@@ -2,6 +2,8 @@ from dotenv import load_dotenv
 load_dotenv()
 from pathlib import Path
 from fastapi.staticfiles import StaticFiles
+
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
 from fastapi import FastAPI, HTTPException
