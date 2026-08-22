@@ -1,3 +1,5 @@
+from requirement.parser import RequirementParser
+from filtering.candidate_filter import filter_candidates
 from config import settings
 from ingestion.load_data import load_model_data
 from ingestion.build_documents import build_documents
@@ -16,16 +18,50 @@ def build_index():
     count = upsert_documents(collection, documents, embeddings)
     print(f"Indexed documents: {count}")
 
-def ask(query: str, top_k: int = 5):
+def ask(query: str, top_k: int = 10):
+
+    # 1. Parse user requirements
+        # Parse requirement
+        parser = RequirementParser()
+        parsed_requirement = parser.parse(query)
+
+    # 2. Retrieve a broader set of candidates
     embedder = Embedder(settings.embedding_model)
-    collection = get_collection(settings.vector_dir, settings.collection_name)
-    retriever = Retriever(collection, embedder)
-    retrieved = retriever.retrieve(query, top_k=top_k)
-    prompt = build_grounded_prompt(query, retrieved)
-    answer = generate_answer(
-        settings.llm_base_url, settings.llm_api_key, settings.llm_model, prompt
+    collection = get_collection(
+        settings.vector_dir,
+        settings.collection_name
     )
-    return {"query": query, "retrieved_models": retrieved, "answer": answer}
+
+    retriever = Retriever(collection, embedder)
+
+    retrieved = retriever.retrieve(
+        query,
+        top_k=top_k
+    )
+
+    # 3. Filter retrieved candidates
+        # Candidate filtering
+        filtered = filter_candidates(retrieved, parsed_requirement)
+
+    # 4. Build grounded prompt from filtered models
+        # Build grounded prompt from filtered candidates
+        prompt = build_grounded_prompt(query, filtered)
+
+    # 5. Generate final answer
+    answer = generate_answer(
+        settings.llm_base_url,
+        settings.llm_api_key,
+        settings.llm_model,
+        prompt
+    )
+
+    return {
+        "query": query,
+            "parsed_requirement": parsed_requirement,
+        "retrieved_models": retrieved,
+            "filtered_models": filtered,
+        "answer": answer
+    }
 
 if __name__ == "__main__":
     build_index()
