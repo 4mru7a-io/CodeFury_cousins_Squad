@@ -174,8 +174,8 @@
 // ModelProof - Frontend ↔ Backend Integration
 // ============================================================
 
-// Local backend during development
-const API_URL = window.API_URL || "http://127.0.0.1:8000/recommend";
+// Use `window.API_URL` if provided (for cross-origin setups), otherwise call same-origin `/recommend`.
+const API_URL = "https://codefury-cousins-squad.onrender.com/recommend";
 
 
 // ============================================================

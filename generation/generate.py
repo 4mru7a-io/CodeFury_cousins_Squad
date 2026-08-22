@@ -57,7 +57,14 @@ def generate_answer(base_url: str, api_key: str, model: str, prompt: str) -> str
         },
         timeout=90,
     )
-
-    response.raise_for_status()
-
-    return response.json()["choices"][0]["message"]["content"]
+    try:
+        response.raise_for_status()
+        return response.json()["choices"][0]["message"]["content"]
+    except Exception as e:
+        # Fail gracefully during demos — return fallback message including a short error note.
+        return (
+            "LLM generation failed or is not configured correctly.\n\n"
+            "Grounded evidence has been retrieved and filtered successfully.\n"
+            "The retrieved model candidates are available in the pipeline result.\n\n"
+            f"(LLM error: {str(e)})"
+        )

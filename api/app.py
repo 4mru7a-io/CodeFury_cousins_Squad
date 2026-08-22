@@ -1,5 +1,8 @@
 from dotenv import load_dotenv
 load_dotenv()
+from pathlib import Path
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -15,6 +18,14 @@ class QueryRequest(BaseModel):
 
 
 app = FastAPI(title="ModelProof API")
+BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_DIR = BASE_DIR / "static"
+
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+@app.get("/")
+def serve_frontend():
+    return FileResponse("frontend/index.html")
 
 # Development-friendly CORS; tighten for production.
 app.add_middleware(
